@@ -19,7 +19,7 @@ class SizeSelectorScreen extends StatefulWidget {
 }
 
 class _SizeSelectorScreenState extends State<SizeSelectorScreen> {
-  String selectedSize = "";
+  String selectedSize = " ";
 
   void _onSizeButtonPressed(String size) {
     setState(() {
@@ -32,15 +32,15 @@ class _SizeSelectorScreenState extends State<SizeSelectorScreen> {
     );
   }
 
-  Widget _buildSizeButton(String size) {
+  Widget _buildSizeButton(String size, double paddingVertical, double paddingHorizontal) {
     return ElevatedButton(
       onPressed: () => _onSizeButtonPressed(size),
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(6.0),
+          borderRadius: BorderRadius.circular(8.0),
         ),
-        primary: size == selectedSize ? Colors.orangeAccent : Colors.white10,
-        padding: EdgeInsets.symmetric(vertical: size == "S" ? 10 : 10, horizontal: 40),
+        backgroundColor: size == selectedSize ? Colors.orangeAccent : Colors.white10,
+        padding: EdgeInsets.symmetric(vertical: paddingVertical, horizontal: paddingHorizontal),
       ),
       child: Text(
         size,
@@ -63,19 +63,21 @@ class _SizeSelectorScreenState extends State<SizeSelectorScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildSizeButton("S"),
-                _buildSizeButton("M"),
-                _buildSizeButton("L"),
-                _buildSizeButton("XL"),
+                _buildSizeButton("S", 10, 40),
+                _buildSizeButton("M", 10, 40),
+                _buildSizeButton("L", 10, 40),
+                _buildSizeButton("XL", 10, 40),
               ],
             ),
+            SizedBox(height: 5),
             Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  _buildSizeButton("XXL"),
-                  _buildSizeButton("XXXL"),
-                ],
-              ),
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                _buildSizeButton("XXL", 10, 25),
+                SizedBox(width: 5),
+                _buildSizeButton("XXXL", 10, 25),
+              ],
+            ),
           ],
         ),
       ),
